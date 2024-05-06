@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h> 
+void Triangle(char tri);
+void nineXnine(int n1);
 int main()
 {
 //1.在螢幕上出現個人風格的畫面(至少20行)。使用者按鍵後清除螢幕進入步驟2.//
@@ -68,12 +70,13 @@ int main()
 	puts("/       3                        3    /");
 	puts("///////////////////////////////////////");
 //4	
-	char ch,tri;
+	char ch,tri,ans;
 	int n1,num;
 	printf("請輸入一個字元在a到c之間:\n");
     scanf(" %c", &ch);
 		getchar();
-	switch (ch){
+	switch (ch)
+	{
     	case 'A':
     	case 'a':	
 			system("cls");
@@ -103,28 +106,27 @@ int main()
     				}
                     nineXnine(num); 
                     break;
-		
-			
-				
-    	
-    	
-		
-		
-		
-		
-		
-		
-		
-       		
-
-
-        
-        
-        
-       	
-       	
-    
-}
+        case 'C':
+    	case 'c':
+    		system("cls");
+				printf("Continue?(y/n):");
+				scanf("%s",&ans);
+				while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')
+				{
+					printf("Continue? (y/n):");
+					scanf("%s",&ans);
+					getchar();
+				}
+				if(ans=='y'||ans=='Y')
+				{
+        		system("CLS");
+        		break;
+			}
+			else if(ans=='n'||ans=='N')
+				break;  
+				default:
+                    printf("錯誤: 輸入字元不在 'a' 至 'c' 區間\n"); 
+	}
 system("pause");
 	return 0;
 }
@@ -155,6 +157,3 @@ void nineXnine(int n1) {
         printf("\n");
     }
 }
-
-	
-
