@@ -56,6 +56,4 @@ int main()
 		printf("錯誤次數超過3次，程序退出\n");
 		return 0;
 	}
-
-	
-	
+} 
