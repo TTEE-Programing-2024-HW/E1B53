@@ -68,15 +68,16 @@ int main()
 	puts("/       3                        3    /");
 	puts("///////////////////////////////////////");
 //4	
-	char ch,tri,nineXnine;
+	char ch,tri;
+	int n1,num;
 	printf("請輸入一個字元在a到c之間:\n");
     scanf(" %c", &ch);
 		getchar();
 	switch (ch){
     	case 'A':
     	case 'a':	
-		    system("cls");
-       	    printf("請輸入一個(a-n)的字母:");
+			system("cls");
+       		printf("請輸入一個(a-n)的字母:");
        		scanf("%c",&tri);
 			while (tri<'a'||tri>'n')
        		{
@@ -87,6 +88,22 @@ int main()
        		}
        	Triangle(tri);
 		break;
+		case 'B':
+    	case 'b':
+     		system("cls");
+                    int n1,num;
+					printf("輸入一個1到9之間的整數:n：");
+                    scanf("%d",&num);
+                    getchar();
+                    while(num<1||num>9)
+					{
+        			printf("錯誤，請輸入1至9之間的整數\n");
+        			scanf("%d", &num);
+        			getchar();
+    				}
+                    nineXnine(num); 
+                    break;
+		
 			
 				
     	
@@ -116,7 +133,7 @@ void Triangle(char tri){
     int i,j;
     int rows=tri-'a'+1; 
 
-    for (i=0; i<rows;i++){
+    for (i=0;i<rows;i++){
        
         for (j=rows-i-1;j>0;j--){
             printf(" ");
@@ -124,6 +141,16 @@ void Triangle(char tri){
      
         for (j=0;j<=i;j++){
             printf("%c",'a'+j);
+        }
+        printf("\n");
+    }
+}
+void nineXnine(int n1) {
+    printf("乘法表：\n");         
+    int i,j;
+    for(i=1;i<=n1;++i) {
+        for (j=1;j<=n1;++j) {
+            printf("%d*%d =%-3d",i,j,i*j);   
         }
         printf("\n");
     }
