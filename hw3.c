@@ -1,7 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h> 
-void Availableseats();
+#include <time.h>
+void displayseat();
+void log1seat();
+void log2seat();
 char seat[9][9];
 int main()
 {
@@ -74,27 +77,133 @@ int main()
 	char ch;
 	int n1,num;
 	printf("請輸入一個字元在a到d之間:\n");
-    scanf(" %c", &ch);//讀取字元 
-    switch(ch)
+    scanf(" %c", &ch); 
+    switch(ch){ 
     	case 'a':
-    	    system("cls");
-            Availableseats();
+                	system("cls");
+                	displayseat();
+          	      	break;
+        case 'b':    
+			{
+			system("cls");
+            int s,i,j;
+        	printf("請輸入所需座位數量 (1~4): ");
+        	scanf("%d", &s);
+        	getchar();  
+        	displayseat();
+        	if(s>=1 && s<= 3)
+			{
+        		int start_row = rand()%9; 
+            	int start_col = rand()%(9-s+1); 
+            	for(i=0;i<s;i++)
+				{
+            		if(seat[start_row][start_col + i] !='*')
+					{
+            			seat[start_row][start_col + i] = '@'; 
+            		}
+            	}
+    		}
+			else if(s == 4)
+			{
+    			int o;
+    			printf("請選擇一種前後兩列各兩個座位(1)/連續4個(2):");
+    			scanf("%d",&o);
+    			if(o==1)
+				{
+               		int start_row = rand() % 7;
+               		int start_col = rand() % 8; 
+               		for (i=start_row;i<start_row+2;i++) 
+					{
+            			for (j=start_col;j<start_col+2;j++)
+						{
+                        	seat[i][j] = '@';
+                    	}
+					}
+				}
+    			if(o==2)
+				{
+               		int start_row = rand() % 8;  
+                	int start_col = rand() % 6; 
+                	for (i=0;i<4;i++)
+					{
+                		if(seat[start_row][start_col + i] !='*')
+						{
+                    		seat[start_row][start_col + i] = '@'; 
+                    	}
+                	}
+				}
+			}
+    			printf("更新後的座位表：\n");
+    			displayseat();
+    			char faction;
+    			printf("是否滿意座位？(y/n):");
+    			scanf(" %c", &faction); 
+    			getchar();            
+    			if (faction== 'y' || faction=='Y')
+					{
+    					log1seat();
+        				system("cls");
+						break; 
+    				}
+					else if (faction== 'n' || faction=='N')
+					{
+    					log2seat();
+        				system("cls");
+						break;
+    				}
+						else
+						{
+    						printf("請輸入'y'或'n'\n");
+    					
+						}
+		
+	
+		} 
+						
           	
 		
-} 
+}
+}
 
-void Availableseats()
+void displayseat()
 {
 	int i,j;
-	printf("\\123456789\n");   //印出第一列 
+	printf("\\123456789\n");    
     for (i=0;i<9;i++){
-        printf("%d",i+1);      
-        for (j=0;j<9;j++){    //印出第一行 
+        printf("%d",i+1);       
+        for (j=0;j<9;j++){
             printf("%c",seat[i][j]); 
         }
         printf("\n"); 
     }
 }
+
+void log1seat()
+{
+	int i,j;
+	for(i=0;i<9;i++) {
+        for(j=0;j<9;j++){
+        	if(seat[i][j]=='@'){
+        		seat[i][j]='*';
+       		}	
+    	}
+	}
+}
+void log2seat()
+{
+	int i,j;
+	for(i=0;i<9;i++)
+	{
+        for(j=0;j<9;j++)
+		{
+        	if(seat[i][j]=='@')
+			{
+        		seat[i][j]='-';
+        	}
+   		}
+	}
+}
+
 	
 	
 	
