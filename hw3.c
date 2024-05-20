@@ -163,6 +163,7 @@ int main()
 		}
 		
   		case 'c':
+  		{
     	printf("請選擇一個位置，如5-2列5列第2行、3-7會是第3列第7行。\n");
     	printf("選擇一個座位:");
     	char seat_choice[5];
@@ -189,9 +190,34 @@ int main()
     	printf("更新后座位表：\n");
     	displayseat();
     	break;	
-		
 		}
+		case 'd':
+			{
+			system("cls");
+			char ans;
+				printf("Continue?(y/n):");
+				scanf("%s",&ans);//讀取字元
+				while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')//判斷字源是否為y或x 
+				{
+					printf("Continue? (y/n):");
+					scanf("%s",&ans);// 重新讀取字元
+					getchar();//進入緩衝區讀取輸入值
+				}
+				if(ans=='y'||ans=='Y')
+				{
+        		system("CLS");
+        		break;//結束跳出迴圈 
+			}
+			else if(ans=='n'||ans=='N')
+				break; //結束跳出迴圈  
+				default:
+                    printf("錯誤: 輸入字元不在 'a' 至 'c' 區間\n"); 
+	}
+system("pause");
+	return 0;
 }
+}
+
 
 void displayseat()
 {
