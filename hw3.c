@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h> 
+void Availableseats();
+char seat[9][9];
 int main()
 {
 //1.在螢幕上出現個人風格的畫面(至少20行)。使用者按鍵後清除螢幕進入步驟2.//
@@ -68,7 +70,31 @@ int main()
 	puts("/       3   d=Exit                  3      /");
 	puts("/        號                          號    /");
 	puts("////////////////////////////////////////////");
+//a,b,c,d程式碼 
+	char ch;
+	int n1,num;
+	printf("請輸入一個字元在a到d之間:\n");
+    scanf(" %c", &ch);//讀取字元 
+    switch(ch)
+    	case 'a':
+    	    system("cls");
+            Availableseats();
+          	
+		
 } 
+
+void Availableseats()
+{
+	int i,j;
+	printf("\\123456789\n");   //印出第一列 
+    for (i=0;i<9;i++){
+        printf("%d",i+1);      
+        for (j=0;j<9;j++){    //印出第一行 
+            printf("%c",seat[i][j]); 
+        }
+        printf("\n"); 
+    }
+}
 	
 	
 	
