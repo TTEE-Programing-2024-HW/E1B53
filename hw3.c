@@ -5,6 +5,8 @@
 void displayseat();
 void log1seat();
 void log2seat();
+int parse_seat_choice(const char* seat_choice, int* row, int* col);
+int validate_seat_selection(int row, int col);
 char seat[9][9];
 int main()
 {
@@ -88,8 +90,8 @@ int main()
 			system("cls");
             int s,i,j;
         	printf("請輸入所需座位數量 (1~4): ");
-        	scanf("%d", &s);
-        	getchar();  
+        	scanf("%d",&s);
+        	getchar(); 
         	displayseat();
         	if(s>=1 && s<= 3)
 			{
@@ -137,8 +139,8 @@ int main()
     			displayseat();
     			char faction;
     			printf("是否滿意座位？(y/n):");
-    			scanf(" %c", &faction); 
-    			getchar();            
+    			scanf(" %c",&faction); 
+    			getchar();         
     			if (faction== 'y' || faction=='Y')
 					{
     					log1seat();
@@ -158,11 +160,37 @@ int main()
 						}
 		
 	
-		} 
-						
-          	
+		}
 		
-}
+  		case 'c':
+    	printf("請選擇一個位置，如5-2列5列第2行、3-7會是第3列第7行。\n");
+    	printf("選擇一個座位:");
+    	char seat_choice[5];
+    	scanf("%s", seat_choice);
+    	getchar();
+    	int row, col, chosen_seats = 0;
+    	if (parse_seat_choice(seat_choice, &row, &col))
+		{
+        	if (validate_seat_selection(row, col))
+			{
+            seat[row - 1][col - 1] = '@';
+            chosen_seats++;
+            printf("座位選擇有效。\n");
+        	}	
+			else
+			{
+           		printf("座位選擇無效：該座位已經被選。\n");
+        	}
+    	} 
+			else
+			{
+        		printf("座位選擇解析失敗。\n");
+    		}
+    	printf("更新后座位表：\n");
+    	displayseat();
+    	break;	
+		
+		}
 }
 
 void displayseat()
@@ -180,14 +208,17 @@ void displayseat()
 
 void log1seat()
 {
-	int i,j;
-	for(i=0;i<9;i++) {
-        for(j=0;j<9;j++){
-        	if(seat[i][j]=='@'){
-        		seat[i][j]='*';
-       		}	
-    	}
-	}
+    int i, j;
+    for (i = 0; i < 9; i++)
+    {
+        for (j = 0; j < 9; j++)
+        {
+            if (seat[i][j] == '@')
+            {
+                seat[i][j] = '*'; 
+            }
+        }
+    }
 }
 void log2seat()
 {
@@ -202,6 +233,29 @@ void log2seat()
         	}
    		}
 	}
+}
+int parse_seat_choice(const char* seat_choice, int* row, int* col) {
+    
+    if (sscanf(seat_choice, "%d-%d", row, col) != 2) {         
+        printf("解析座位選擇失敗：請按照格式輸入座位選擇，如1-2、2-9。\n");
+        return 0;
+    }
+    
+    if (*row < 1 || *row > 9 || *col < 1 || *col > 9) {
+        printf("解析座位選擇失敗：座位選擇超出範圍。\n");
+        return 0;
+    }
+    printf("解析座位選擇成功：%d 行 %d 列。\n", *row, *col);
+    return 1;    
+    
+}
+
+	 int validate_seat_selection(int row, int col) {
+    if (seat[row - 1][col - 1] == '*') {
+        printf("錯誤：座位已經被預訂。\n");
+        return 0;
+    }
+    return 1; 
 }
 
 	
