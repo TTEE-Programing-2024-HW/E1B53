@@ -1,14 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<conio.h> 
-#include <time.h>
 void displayseat();
 void log1seat();
 void log2seat();
 int parse_seat_choice(const char* seat_choice, int* row, int* col);
 int validate_seat_selection(int row, int col);
 char seat[9][9];
-int main()
+int main()//Main function
 {
 
 	puts("///////////////////////////////////////");// Personal style interface
@@ -77,7 +75,6 @@ int main()
 	puts("////////////////////////////////////////////");
 
 	char ch;
-	int n1,num;
 	printf("請輸入一個字元在a到d之間:\n");
     scanf(" %c", &ch); // Read user ch
     switch(ch){ 
@@ -89,14 +86,14 @@ int main()
 			{
 			system("cls");
             int s,i,j;
-        	printf("請輸入所需座位數量 (1~4): ");
+        	printf("請輸入所需座位數量 (1~4):");
         	scanf("%d",&s);//Read 
         	getchar();// Consume newline 
-        	displayseat();
-        	if(s>=1 && s<= 3)
+        	displayseat();//plug-in
+        	if(s>=1 && s<=3)
 			{
-        		int start_row = rand()%9; 
-            	int start_col = rand()%(9-s+1); 
+        		int start_row = rand()%9;//Generate a random number between 0-8(row) 
+            	int start_col = rand()%(9-s+1);//// Generate a random number between 0-(9-s)(col)
             	for(i=0;i<s;i++)
 				{
             		if(seat[start_row][start_col + i] !='*')
@@ -136,20 +133,20 @@ int main()
 				}
 			}
     			printf("更新後的座位表：\n");
-    			displayseat();
-    			char faction;
+    			displayseat();//plug-in
+    			char check;
     			printf("是否滿意座位？(y/n):");
-    			scanf(" %c",&faction); 
+    			scanf(" %c",&check); 
     			getchar();  // Consume newline       
-    			if (faction== 'y' || faction=='Y')
+    			if (check== 'y' || check=='Y')
 					{
-    					log1seat();
+    					log1seat();//plug-in
         				system("cls");
 						break; 
     				}
-					else if (faction== 'n' || faction=='N')
+					else if (check== 'n' || check=='N')
 					{
-    					log2seat();
+    					log2seat();//plug-in
         				system("cls");
 						break;
     				}
@@ -174,21 +171,21 @@ int main()
 		{
         	if (validate_seat_selection(row, col))
 			{
-            seat[row - 1][col - 1] = '@';
+            seat[row-1][col-1]='@';
             chosen_seats++;
-            printf("座位選擇有效。\n");
+            printf("座位選擇有效\n");
         	}	
 			else
 			{
-           		printf("座位選擇無效：該座位已經被選。\n");
+           		printf("座位已被選取\n");
         	}
     	} 
 			else
 			{
-        		printf("座位選擇解析失敗。\n");
+        		printf("座位選擇失敗。\n");
     		}
     	printf("更新后座位表：\n");
-    	displayseat();
+    	displayseat();//plug-in
     	break;	
 		}
 		case 'd':
@@ -197,7 +194,7 @@ int main()
 			char ans;
 				printf("Continue?(y/n):");
 				scanf("%s",&ans);//Read 
-				while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')
+				while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')// Check if the character is 'y' or 'x'
 				{
 					printf("Continue? (y/n):");
 					scanf("%s",&ans);
@@ -222,16 +219,15 @@ system("pause");
 void displayseat()
 {
 	int i,j;
-	printf("\\123456789\n");    
+	printf("\\123456789\n");  // Display seat numbers  
     for (i=0;i<9;i++){
-        printf("%d",i+1);       
+        printf("%d",i+1);   // Display row numbers    
         for (j=0;j<9;j++){
-            printf("%c",seat[i][j]); 
+            printf("%c",seat[i][j]); // Display seat status
         }
         printf("\n"); 
     }
 }
-
 void log1seat()
 {
     int i, j;
@@ -241,7 +237,7 @@ void log1seat()
         {
             if (seat[i][j] == '@')
             {
-                seat[i][j] = '*'; 
+                seat[i][j] = '*'; // Log seat as reserved
             }
         }
     }
@@ -255,7 +251,7 @@ void log2seat()
 		{
         	if(seat[i][j]=='@')
 			{
-        		seat[i][j]='-';
+        		seat[i][j]='-';// Log seat as canceled
         	}
    		}
 	}
@@ -267,7 +263,7 @@ int parse_seat_choice(const char* seat_choice, int* row, int* col) {
         return 0;
     }
  
-// Return 0 if the seat selection is out of range
+	// Return 0 if the seat selection is out of range
     if (*row < 1 || *row > 9 || *col < 1 || *col > 9) {
         printf("解析座位選擇失敗：座位選擇超出範圍。\n");
         return 0;
@@ -285,6 +281,7 @@ int parse_seat_choice(const char* seat_choice, int* row, int* col) {
     return 1; 
 }
 //這次作業我花了很多時間來了解買個題目我需要怎麼做也花了很多時間去打出作業內容
+//我也使用了很多時間去和同學討論程式要怎麼打,但還是有些程式打不出來或有點小錯 
 //這次做也我學到了很多新的C語言用法希望對我以後打程式有更多幫助 
 	
 	
