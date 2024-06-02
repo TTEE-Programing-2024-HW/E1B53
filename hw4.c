@@ -136,7 +136,7 @@ void search_student(Student students[], int n) {
     clear_screen();
     printf("請輸入要搜尋的姓名：");
     while (getchar() != '\n');
-    fgets(search_name, sizeof(search_name), stdin);
+    gets(search_name);
     search_name[strcspn(search_name, "\n")] = 0;
 	int i; 
     for (i = 0; i < n; i++) {
@@ -150,6 +150,28 @@ void search_student(Student students[], int n) {
 
     if (!found) printf("資料不存在。\n");
 
+    printf("按任意鍵返回主選單...");
+    getchar();
+    getchar();
+}
+void grade_ranking(Student students[], int n) {
+    clear_screen();
+    int i,j; 
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (students[j].average < students[j + 1].average) {
+                Student temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("成績排名：\n");
+    
+    for (i = 0; i < n; i++) {
+        printf("姓名: %s, 學號: %d, 平均成績: %.1f\n", students[i].name, students[i].id, students[i].average);
+    }
     printf("按任意鍵返回主選單...");
     getchar();
     getchar();
@@ -184,6 +206,10 @@ int main()
 			case 'C':
 			case 'c':
 			 	search_student(students, n); 
+				break;
+			case 'D':
+			case 'd':	
+				grade_ranking(students, n);
 				break;	
 			
 				
