@@ -117,8 +117,22 @@ void input_students(Student students[], int *n) {
         students[i].average = (students[i].math + students[i].physics + students[i].english) / 3.0;
     }
 }
+void display_students(Student students[], int n)
+{
+    clear_screen();
+    printf("學生成績列表：\n");
+    int i; 
+    for (i = 0; i < n; i++) {
+        printf("姓名: %s\n學號: %d\n數學: %d\n物理: %d\n英文: %d\n平均成績: %.1f\n\n",
+               students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, students[i].average);
+    }
+    printf("按任意鍵返回主選單...");
+    getchar();
+    getchar();
+}
 
-int main() {
+int main()
+{
     char choice;
     Student students[MAX_STUDENTS];
     int n = 0;
@@ -134,9 +148,17 @@ int main() {
         scanf(" %c", &choice);
 
         switch (choice) {
-            case 'a':
-			 clear_screen(); input_students(students, &n); break;
-            
+            case 'A':
+			case 'a':
+			 	clear_screen(); 
+				input_students(students, &n); 
+				break;
+            case 'B':
+			case 'b':
+				display_students(students, n); 
+				break;
+			
+				
     }
     return 0;
 }
