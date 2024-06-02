@@ -190,7 +190,7 @@ int main()
     while (1) {
         clear_screen();
         menu();
-        printf("輸入a-d選取");
+        printf("輸入a-e選取");
         scanf(" %c", &choice);
 
         switch (choice) {
@@ -210,7 +210,30 @@ int main()
 			case 'D':
 			case 'd':	
 				grade_ranking(students, n);
-				break;	
+				break;
+			case 'E':
+			case 'e':
+			{
+				clear_screen();
+			    char ans;
+				printf("Continue?(y/n):");
+				scanf("%s",&ans);//Read 
+				while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')// Check if the character is 'y' or 'x'
+				{
+					printf("Continue? (y/n):");
+					scanf("%s",&ans);
+					getchar();
+				}
+				if(ans=='y'||ans=='Y')
+				{
+        		system("CLS");
+        		break; 
+			}
+			else if(ans=='n'||ans=='N')
+				break;
+				default:
+                    printf("錯誤: 輸入字元不在 'a' 至 'c' 區間\n"); 
+	}	
 			
 				
     }
