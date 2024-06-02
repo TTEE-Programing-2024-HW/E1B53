@@ -130,6 +130,30 @@ void display_students(Student students[], int n)
     getchar();
     getchar();
 }
+void search_student(Student students[], int n) {
+    char search_name[50];
+    int found = 0;
+    clear_screen();
+    printf("請輸入要搜尋的姓名：");
+    while (getchar() != '\n');
+    fgets(search_name, sizeof(search_name), stdin);
+    search_name[strcspn(search_name, "\n")] = 0;
+	int i; 
+    for (i = 0; i < n; i++) {
+        if (strcmp(students[i].name, search_name) == 0) {
+            printf("姓名: %s\n學號: %d\n數學: %d\n物理: %d\n英文: %d\n平均成績: %.1f\n",
+                   students[i].name, students[i].id, students[i].math, students[i].physics, students[i].english, students[i].average);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) printf("資料不存在。\n");
+
+    printf("按任意鍵返回主選單...");
+    getchar();
+    getchar();
+}
 
 int main()
 {
@@ -157,6 +181,10 @@ int main()
 			case 'b':
 				display_students(students, n); 
 				break;
+			case 'C':
+			case 'c':
+			 	search_student(students, n); 
+				break;	
 			
 				
     }
